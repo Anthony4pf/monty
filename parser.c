@@ -26,19 +26,24 @@ char **tokenize_string(char *str)
 		num_tokens++;
 		token = strtok(NULL, delim);
 	}
-	tokens = malloc(sizeof(char *) * num_tokens);
+	tokens = malloc(sizeof(char *) * num_tokens + 1);
 	if (tokens == NULL)
 	{
 		fprintf(stderr, "malloc failed\n");
+		free(str_copy);
 		exit(EXIT_FAILURE);
 	}
 	token = strtok(str_copy, delim);
 	while (token != NULL)
 	{
-		tokens[i] = malloc(sizeof(char) * strlen(token));
+		tokens[i] = malloc(sizeof(char) * strlen(token) + 1);
 		if (tokens[i] == NULL)
 		{
 			fprintf(stderr, "malloc failed\n");
+			for (i = i - 1; i >= 0; i--)
+				free(tokens[i]);
+			free(tokens);
+			free(str_copy);
 			exit(EXIT_FAILURE);
 		}
 		strcpy(tokens[i], token);
@@ -48,6 +53,6 @@ char **tokenize_string(char *str)
 	}
 
 	tokens[i] = NULL;
-
+	free(str_copy);
 	return (tokens);
 }

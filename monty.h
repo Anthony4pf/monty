@@ -39,7 +39,7 @@ void (*get_instruction(char *opc))(stack_t **stack, unsigned int line_number);
 int check_if_integer(char *);
 void _push(stack_t **, unsigned int);
 void _pall(stack_t **, unsigned int);
-
+void free_stack(stack_t **);
 
 
 
