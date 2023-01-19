@@ -33,12 +33,12 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-extern char **toks;
-char **tokenize_string(char *str);
+char **toks;
+char **tokenize_string(char *);
 void (*get_instruction(char *opc))(stack_t **stack, unsigned int line_number);
-stack_t *top;
 int check_if_integer(char *);
-void push(stack_t **stack, unsigned int line_num);
+void _push(stack_t **, unsigned int);
+void _pall(stack_t **, unsigned int);
 
 
 

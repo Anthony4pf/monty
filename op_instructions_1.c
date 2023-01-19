@@ -1,61 +1,64 @@
 #include "monty.h"
-	
+
 /**
-*push - push an element to the top of the stack
+*_push - push an element to the top of the stack
 *@stack: address of the top element of the stack
 *@line_number: line number of the monty bytecode opcode
 *Return: void
 */
 
-void push(stack_t **stack, unsigned int line_number)
+void _push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *node;
+	stack_t *new_node;
 
-	node = malloc(sizeof(stack_t));
-	if (node == NULL)
+	if (toks[1] == NULL)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	if (!check_if_integer(toks[1]))
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	new_node = malloc(sizeof(stack_t));
+	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	if (check_if_integer(toks[1]) == 0 || toks[1] == NULL)
-	{
-		fprintf(stderr, "L%d: usage: push integer", line_number);
-		exit(EXIT_FAILURE);
-	}
-	node->n = atoi(toks[1]);
-	node->prev = NULL;
-	node->next = NULL;
-
+	new_node->n = atoi(toks[1]);
+	new_node->prev = NULL;
+	new_node->next = NULL;
 	if (*stack == NULL)
 	{
-		*stack = node;
-		top = *stack;
-		return;
+		*stack = new_node;
 	}
-	node->next = *stack;
-	*stack = node;
-	top = *stack;
+	else
+	{
+		new_node->next = *stack;
+		*stack = new_node;
+	}
 }
-
 /**
-*pall - prints all the values of a stack
+*_pall - prints all the values of a stack
 *@stack: address of stack
-*line_number: line number of opcode
+*@line_number: line number of opcode
 *Return: void
 */
 
-void pall(stack_t **stack, unsigned int line_number)
+void _pall(stack_t **stack, unsigned int line_number)
 {
+	stack_t *ptr;
+	(void)line_number;
+	ptr = *stack;
 
+	while (ptr != NULL)
+	{
+		printf("%u\n", ptr->n);
+		ptr = ptr->next;
+	}
 }
-
-
-
-
-
-
-
-
 
 
 

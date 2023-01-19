@@ -3,7 +3,6 @@
 /**
 *tokenize_string - separate a string into different tokens
 *@str: string to be tokenized from the terminal
-*@num: number of characters read from the terminal
 *Return: array of tokens
 */
 

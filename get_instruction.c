@@ -9,8 +9,8 @@
 void (*get_instruction(char *opc))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t funcs[] = {
-	{"push", push},
-	{"pall", print_all},
+	{"push", _push},
+	{"pall", _pall},
 	{NULL, NULL}
 	};
 
@@ -18,7 +18,7 @@ void (*get_instruction(char *opc))(stack_t **stack, unsigned int line_number)
 
 	while (funcs[i].opcode)
 	{
-		if (funcs[i].opcode[0] == (*opc))
+		if (strcmp(funcs[i].opcode, opc) == 0)
 		{
 			return (funcs[i].f);
 		}

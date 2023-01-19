@@ -13,8 +13,9 @@ int main(int argc, char *argv[])
 	unsigned int line_num = 1;
 	char line[BUFSIZ];
 	void (*f)(stack_t **, unsigned int);
-	stack_t *stack;
-	if (argc > 2)
+
+	stack_t *stack = NULL;
+	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
@@ -25,21 +26,22 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (fgets(line, BUFSIZ, file) != NULL)
+	while ((fgets(line, BUFSIZ, file)) != NULL)
 	{
 		toks = tokenize_string(line);
-		f = get_instruction(toks[1]);
+		f = get_instruction(toks[0]);
 		if (f != NULL)
 		{
 			f(&stack, line_num);
 		}
 		else
 		{
-			fprintf(stderr, "L%u: unknown instruction %s", line_num, toks[1]);
+			fprintf(stderr, "L%u: unknown instruction %s\n", line_num, toks[0]);
 			exit(EXIT_FAILURE);
 		}
 		line_num++;
 	}
 
-	return (0);		
+	fclose(file);
+	return (0);
 }
