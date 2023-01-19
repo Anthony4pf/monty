@@ -2,7 +2,7 @@
 
 /**
 *get_instruction - find the instruction for the opcode specified
-*@opc - opcode for the instruction
+*@opc: opcode for the instruction
 *Return: NULL or the instruction
 */
 

@@ -29,6 +29,8 @@ int main(int argc, char *argv[])
 	}
 	while ((fgets(line, BUFSIZ, file)) != NULL)
 	{
+		if (strlen(line) < 2)
+			continue;
 		toks = tokenize_string(line);
 		f = get_instruction(toks[0]);
 		if (f != NULL)

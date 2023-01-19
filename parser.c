@@ -8,9 +8,8 @@
 
 char **tokenize_string(char *str)
 {
-	char *str_copy, *token;
+	char *str_copy, *token, *delim = " \n";
 	char **tokens;
-	const char *delim = " \n";
 	int num_tokens = 0, i = 0;
 
 	str_copy = malloc(sizeof(char) * strlen(str));
@@ -47,11 +46,9 @@ char **tokenize_string(char *str)
 			exit(EXIT_FAILURE);
 		}
 		strcpy(tokens[i], token);
-
 		token = strtok(NULL, delim);
 		i++;
 	}
-
 	tokens[i] = NULL;
 	free(str_copy);
 	return (tokens);
