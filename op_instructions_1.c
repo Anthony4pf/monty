@@ -41,8 +41,8 @@ void _push(stack_t **stack, unsigned int line_number)
 	}
 }
 /**
-*_pall - prints all the values of a stack
-*@stack: address of stack
+*_pall - prints all the elements of the stack
+*@stack: address of the top of the stack
 *@line_number: line number of opcode
 *Return: void
 */
@@ -60,9 +60,22 @@ void _pall(stack_t **stack, unsigned int line_number)
 	}
 }
 
+/**
+*_pint - prints the value at the top of the stack
+*@stack: pointer of the head of the stack
+*@line_number: line number of the opcode
+*Return: void
+*/
 
-
-
+void _pint(stack_t **stack, unsigned int line_number)
+{
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	printf("%u\n", (*stack)->n);
+}
 
 
 

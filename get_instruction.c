@@ -11,6 +11,7 @@ void (*get_instruction(char *opc))(stack_t **stack, unsigned int line_number)
 	instruction_t funcs[] = {
 	{"push", _push},
 	{"pall", _pall},
+	{"pint", _pint},
 	{NULL, NULL}
 	};
 
