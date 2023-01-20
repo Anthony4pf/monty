@@ -10,11 +10,10 @@
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	unsigned int line_num = 1;
+	unsigned int line_num = 1, i;
 	char line[BUFSIZ];
 	void (*f)(stack_t **, unsigned int);
 	stack_t *stack = NULL;
-	int i;
 
 	if (argc != 2)
 	{
@@ -33,19 +32,16 @@ int main(int argc, char *argv[])
 		{
 			line_num++;
 			continue;
-		}
-		toks = tokenize_string(line);
+		} toks = tokenize_string(line);
 		f = get_instruction(toks[0]);
 		if (f != NULL)
 		{
 			f(&stack, line_num);
-		}
-		else
+		} else
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_num, toks[0]);
 			exit(EXIT_FAILURE);
-		}
-		for (i = 0; toks[i]; i++)
+		} for (i = 0; toks[i]; i++)
 			free(toks[i]);
 		free(toks);
 		line_num++;
