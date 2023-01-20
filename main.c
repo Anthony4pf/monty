@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 	char line[BUFSIZ];
 	void (*f)(stack_t **, unsigned int);
 	stack_t *stack = NULL;
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
