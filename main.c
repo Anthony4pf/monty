@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	unsigned int line_num = 1;
 	char line[BUFSIZ];
 	void (*f)(stack_t **, unsigned int);
-/*	int i;*/
+	int i;
 	stack_t *stack = NULL;
 
 	if (argc != 2)
