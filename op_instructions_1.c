@@ -99,7 +99,17 @@ void _pop(stack_t **stack, unsigned int line_number)
 	temp = NULL;
 }
 
+/**
+*_nop - perform no operation  on the stack
+*@stack: address of the top element of the stack
+*@line_number: line number of the opcode
+*/
 
+void _nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+}
 
 
 
