@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	unsigned int line_num = 1;
 	char line[BUFSIZ];
 	void (*f)(stack_t **, unsigned int);
-	int i;
+/*	int i;*/
 	stack_t *stack = NULL;
 
 	if (argc != 2)
@@ -29,8 +29,11 @@ int main(int argc, char *argv[])
 	}
 	while ((fgets(line, BUFSIZ, file)) != NULL)
 	{
-		if (strlen(line) < 2)
+		if (strspn(line, " \t\r\n") == strlen(line))
+		{
+			line_num++;
 			continue;
+		}
 		toks = tokenize_string(line);
 		f = get_instruction(toks[0]);
 		if (f != NULL)
@@ -47,7 +50,6 @@ int main(int argc, char *argv[])
 		free(toks);
 		line_num++;
 	}
-
 	free_stack(&stack);
 	fclose(file);
 	return (0);

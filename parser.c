@@ -15,7 +15,7 @@ char **tokenize_string(char *str)
 	str_copy = malloc(sizeof(char) * strlen(str));
 	if (str_copy == NULL)
 	{
-		fprintf(stderr, "malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	strcpy(str_copy, str);
@@ -28,7 +28,7 @@ char **tokenize_string(char *str)
 	tokens = malloc(sizeof(char *) * num_tokens + 1);
 	if (tokens == NULL)
 	{
-		fprintf(stderr, "malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		free(str_copy);
 		exit(EXIT_FAILURE);
 	}
@@ -38,11 +38,7 @@ char **tokenize_string(char *str)
 		tokens[i] = malloc(sizeof(char) * strlen(token) + 1);
 		if (tokens[i] == NULL)
 		{
-			fprintf(stderr, "malloc failed\n");
-			for (i = i - 1; i >= 0; i--)
-				free(tokens[i]);
-			free(tokens);
-			free(str_copy);
+			fprintf(stderr, "Error: malloc failed\n");
 			exit(EXIT_FAILURE);
 		}
 		strcpy(tokens[i], token);

@@ -1,5 +1,5 @@
 #include "monty.h"
-
+#include <ctype.h>
 /**
 *check_if_integer - check if a string is an integer
 *@str: string
@@ -8,8 +8,12 @@
 
 int check_if_integer(char *str)
 {
-	int i;
-	for (i = 0; str[i] != '\0'; i++)
+	int i = 0;
+
+	if (str[i] == '-')
+		i++;
+
+	for (; str[i] != '\0'; i++)
 	{
 		if (str[i] < '0' || str[i] > '9')
 			return (0);
