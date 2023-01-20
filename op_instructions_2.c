@@ -73,7 +73,42 @@ void _add(stack_t **stack, unsigned int line_number)
 	temp = NULL;
 }
 
+/**
+*_sub - subtracts the top element of the stack from the second top element
+*@stack: address of the top element of the stack
+*@line_number: line number of the opcode
+*Return: void
+*/
 
+void _sub(stack_t **stack, unsigned int line_number)
+{
+	stack_t *ptr = NULL, *temp = NULL;
+	int diff = 0, count = 0;
+
+	ptr = *stack;
+
+	while (ptr != NULL)
+	{
+		count++;
+		ptr = ptr->next;
+	}
+	if (count < 2)
+	{
+		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	ptr = NULL;
+	temp = *stack;
+	ptr = (*stack)->next;
+
+	diff = ptr->n - temp->n;
+	ptr->n = diff;
+
+	*stack = ptr;
+	(*stack)->prev = NULL;
+	free(temp);
+	temp = NULL;
+}
 
 
 
