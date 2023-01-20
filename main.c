@@ -14,7 +14,6 @@ int main(int argc, char *argv[])
 	char line[BUFSIZ];
 	void (*f)(stack_t **, unsigned int);
 	stack_t *stack = NULL;
-
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -44,9 +43,9 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_num, toks[0]);
 			exit(EXIT_FAILURE);
 		}
+		free(toks);
 		line_num++;
 	}
 	free_stack(&stack);
-	fclose(file);
 	return (0);
 }
