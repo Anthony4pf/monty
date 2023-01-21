@@ -36,20 +36,14 @@ void _swap(stack_t **stack, unsigned int line_number)
 void _add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *ptr = NULL, *temp = NULL;
-	int sum = 0, count = 0;
+	int sum = 0;
 
-	ptr = *stack;
-	while (ptr != NULL)
-	{
-		count++;
-		ptr = ptr->next;
-	}
-	if (count < 2)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	ptr = NULL;
+
 	temp = *stack;
 	ptr = (*stack)->next;
 
@@ -71,32 +65,21 @@ void _add(stack_t **stack, unsigned int line_number)
 
 void _sub(stack_t **stack, unsigned int line_number)
 {
-	stack_t *ptr = NULL, *temp = NULL;
-	int diff = 0, count = 0;
+	int temp;
+	stack_t *top;
 
-	ptr = *stack;
-
-	while (ptr != NULL)
-	{
-		count++;
-		ptr = ptr->next;
-	}
-	if (count < 2)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	ptr = NULL;
-	temp = *stack;
-	ptr = (*stack)->next;
+	top = *stack;
+	temp = top->n;
 
-	diff = ptr->n - temp->n;
-	ptr->n = diff;
-
-	*stack = ptr;
+	*stack = top->next;
 	(*stack)->prev = NULL;
-	free(temp);
-	temp = NULL;
+	free(top);
+	(*stack)->n -= temp;
 }
 
 
