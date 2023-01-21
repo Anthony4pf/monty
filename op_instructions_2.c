@@ -140,18 +140,3 @@ void _mul(stack_t **stack, unsigned int line_number)
 	free(top);
 	(*stack)->n *= num;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

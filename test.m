@@ -6,6 +6,6 @@ push 10
 
 push 2
 
-mul
+mod
 
 pall
