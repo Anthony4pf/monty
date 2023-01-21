@@ -65,7 +65,7 @@ void _add(stack_t **stack, unsigned int line_number)
 
 void _sub(stack_t **stack, unsigned int line_number)
 {
-	int temp;
+	int num;
 	stack_t *top;
 
 	if (*stack == NULL || (*stack)->next == NULL)
@@ -74,18 +74,18 @@ void _sub(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	top = *stack;
-	temp = top->n;
+	num = top->n;
 
 	*stack = top->next;
 	(*stack)->prev = NULL;
 	free(top);
-	(*stack)->n -= temp;
+	(*stack)->n -= num;
 }
 
 /**
 *_div - divides the second top element of the stack by the top element
 *@stack: address of the top element of the stack;
-*line_number: line number of the opcode
+*@line_number: line number of the opcode
 *Return: void
 */
 
@@ -114,7 +114,32 @@ void _div(stack_t **stack, unsigned int line_number)
 }
 
 
+/**
+*_mul - multiplies the second top element of the stack with the top element
+*@stack: address of the top element of the stack
+*@line_number: line number of the opcode
+*Return: void
+*/
 
+void _mul(stack_t **stack, unsigned int line_number)
+{
+	stack_t *top;
+	int num;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't mul, stack too short", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	top = *stack;
+	num = top->n;
+
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+	free(top);
+	(*stack)->n *= num;
+}
 
 
 
