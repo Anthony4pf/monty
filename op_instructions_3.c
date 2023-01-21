@@ -58,30 +58,32 @@ void _pchar(stack_t **stack, unsigned int line_number)
 	printf("%c\n", num);
 }
 
+/**
+*_pstr - print the string starting at the top of the stack
+*@stack: address of the top element of the stack
+*@line_number: line number of the opcode
+*Return: void
+*/
 
+void _pstr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *ptr;
+	(void)line_number;
 
+	ptr = *stack;
+	while (ptr != NULL)
+	{
+		if (ptr->n <= 0 || ptr->n > 127)
+		{
+			break;
+		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		printf("%c", ptr->n);
+		ptr = ptr->next;
+	}
+	printf("\n");
+	ptr = NULL;
+}
 
 
 
