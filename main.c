@@ -28,11 +28,12 @@ int main(int argc, char *argv[])
 	}
 	while ((fgets(line, BUFSIZ, file)) != NULL)
 	{
-		if (strspn(line, " \t\r\n") == strlen(line))
+		if (strspn(line, " \t\r\n") == strlen(line) || line[strspn(line, " \t\r\n")] == '#')
 		{
 			line_num++;
 			continue;
-		} toks = tokenize_string(line);
+		} 
+		toks = tokenize_string(line);
 		f = get_instruction(toks[0]);
 		if (f != NULL)
 		{
@@ -41,7 +42,8 @@ int main(int argc, char *argv[])
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_num, toks[0]);
 			exit(EXIT_FAILURE);
-		} for (i = 0; toks[i]; i++)
+		} 
+		for (i = 0; toks[i]; i++)
 			free(toks[i]);
 		free(toks);
 		line_num++;
