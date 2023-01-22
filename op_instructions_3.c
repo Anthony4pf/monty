@@ -86,17 +86,17 @@ void _pstr(stack_t **stack, unsigned int line_number)
 }
 
 /**
-*_rotl -  rotates the stack to the top
+*_rotl -  rotates the tail to the top
 *@stack: address of the top element of the stack
 *@line_number: line number of the opcode
 *Return: void
 */
 
-void _rotr(stack_t **stack, unsigned int line_number)
+void _rotl(stack_t **stack, unsigned int line_number)
 {
-	stack_t *ptr1, *ptr2;
-	(void)line_number;
+	stack_t *first, *last;
 
+	(void)line_number;
 
 	if ((*stack == NULL) || ((*stack)->next == NULL))
 	{
@@ -104,95 +104,46 @@ void _rotr(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
-		ptr1 = *stack;
-		ptr2 = ptr1->next;
-
-		ptr1->next = NULL;
-		ptr1->prev = ptr2;
-
-		while (ptr2 != NULL)
+		first = last = *stack;
+		while (last->next)
 		{
-			ptr2->prev = ptr2->next;
-			ptr2->next = ptr1;
-
-			ptr1 = ptr2;
-			ptr2 = ptr2->prev;
+			last = last->next;
 		}
-
-		*stack = ptr1;
+		*stack = first->next;
+		last->next = first;
+		first->prev = last;
+		first->next = NULL;
+		(*stack)->prev = NULL;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+*_rotr - rotates the stack to the bottom
+*@stack: address of the top element of the stack
+*@line_number: line number of the opcode
+*/
+
+void _rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *first, *last;
+	(void)line_number;
+
+	if ((*stack == NULL) || ((*stack)->next == NULL))
+	{
+		;
+	}
+	else
+	{
+		first = last = *stack;
+
+		while (last->next)
+		{
+			last = last->next;
+		}
+
+		last->prev->next = NULL;
+		last->prev = NULL;
+		last->next = first;
+		first->prev = last;
+		*stack = last;
+	}
+}
