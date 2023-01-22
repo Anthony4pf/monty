@@ -118,9 +118,9 @@ void _rotr(stack_t **stack, unsigned int line_number)
 			ptr1 = ptr2;
 			ptr2 = ptr2->prev;
 		}
-	}
 
-	*stack = ptr1;
+		*stack = ptr1;
+	}
 }
 
 
