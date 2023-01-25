@@ -124,26 +124,21 @@ void _rotl(stack_t **stack, unsigned int line_number)
 
 void _rotr(stack_t **stack, unsigned int line_number)
 {
-	stack_t *first, *last;
+	stack_t *copy;
 	(void)line_number;
 
-	if ((*stack == NULL) || ((*stack)->next == NULL))
+	copy = *stack;
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		;
+		return;
 	}
-	else
+	while (copy->next)
 	{
-		first = last = *stack;
-
-		while (last->next)
-		{
-			last = last->next;
-		}
-
-		last->prev->next = NULL;
-		last->prev = NULL;
-		last->next = first;
-		first->prev = last;
-		*stack = last;
+		copy = copy->next;
 	}
+	copy->next = *stack;
+	copy->prev->next = NULL;
+	copy->prev = NULL;
+	(*stack)->prev = copy;
+	(*stack) = copy;
 }
